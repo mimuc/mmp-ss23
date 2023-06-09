@@ -1,7 +1,7 @@
 import os, pygame
 from pygame.locals import *
 
-def load_sliced_sprites(w, h, filename, max_sprites = float('inf')):
+def load_sliced_sprites(w, h, filename, padding_x = 0, padding_y = 0, max_sprites = float('inf')):
     images = []
     master_image = pygame.image.load(os.path.join('resources', filename)).convert_alpha()
 
@@ -11,7 +11,7 @@ def load_sliced_sprites(w, h, filename, max_sprites = float('inf')):
     amount_of_sprites = min(int((master_width - (padding_x*2)) / w), max_sprites)
 
     for i in range(amount_of_sprites):
-        images.append(master_image.subsurface((i * w, 0, w, h)))
+        images.append(master_image.subsurface((i * w + padding_x, padding_y, w, h)))
 
     return images
 
